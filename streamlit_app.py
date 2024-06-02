@@ -3,38 +3,26 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
-"""
-# Welcome to Streamlit!
+def Generar_Ingresos():
+    mes = ["1-Enero","2-Febrero","3-Marzo","4-Abril","5-Mayo","6-Junio","7-Julio","8-Agosto","9-Septiembre","10-Octubre","11-Noviembre","12-Diciembre"]
+    MontoMensual = 0
+    for i in range(2000,2025):
+        if not o.path.exists(f"Proyecto1\IngresosMensuales\Año {i}"):
+            o.mkdir(f"Proyecto1\IngresosMensuales\Año {i}")
+        
+        for x in range(12):
+            if not o.path.exists(f"Proyecto1\IngresosMensuales\Año {i}\{mes[x]}"):
+                o.mkdir(f"Proyecto1\IngresosMensuales\Año {i}\{mes[x]}")
+                Archivo = open(f"Proyecto1\IngresosMensuales\Año {i}\{mes[x]}\IngresosDelMes.txt","x")
 
-Edit `/streamlit_app.py` to customize this app to your heart's desire :heart:.
-If you have any questions, checkout our [documentation](https://docs.streamlit.io) and [community
-forums](https://discuss.streamlit.io).
+            Archivo = open(f"Proyecto1\IngresosMensuales\Año {i}\{mes[x]}\IngresosDelMes.txt","w")
+            if MontoMensual == 0:
+                MontoMensual = rn.randint(1000,10000)
+            
+            else:
+                MontoMensual = rn.randint(int(MontoMensual * 0.9),int(MontoMensual * 1.1))
+                print(MontoMensual)
+            
+            Archivo.write(str(MontoMensual))
 
-In the meantime, below is an example of what you can do with just a few lines of code:
-"""
-
-num_points = st.slider("Number of points in spiral", 1, 10000, 1100)
-num_turns = st.slider("Number of turns in spiral", 1, 300, 31)
-
-indices = np.linspace(0, 1, num_points)
-theta = 2 * np.pi * num_turns * indices
-radius = indices
-
-x = radius * np.cos(theta)
-y = radius * np.sin(theta)
-
-df = pd.DataFrame({
-    "x": x,
-    "y": y,
-    "idx": indices,
-    "rand": np.random.randn(num_points),
-})
-
-st.altair_chart(alt.Chart(df, height=700, width=700)
-    .mark_point(filled=True)
-    .encode(
-        x=alt.X("x", axis=None),
-        y=alt.Y("y", axis=None),
-        color=alt.Color("idx", legend=None, scale=alt.Scale()),
-        size=alt.Size("rand", legend=None, scale=alt.Scale(range=[1, 150])),
-    ))
+Generar_Ingresos()
